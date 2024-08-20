@@ -1,14 +1,20 @@
 declare namespace pins {
+    // //% fixedInstance shim=pxt::getPin(3)
+    // const RGB: DigitalInOutPin;
+
+    // // % fixedInstance shim=pxt::getPin(49)
+    // const DUMMY: DigitalInOutPin;
+    
     /**
      * Read `size` bytes from a 7-bit I2C `address`.
      */
-    //% shim=pins::i2cReadBuffer
+    //% repeat.defl=0 shim=pins::i2cReadBuffer
     function i2cReadBuffer(address: int32, size: int32, repeat?: boolean): Buffer;
 
     /**
      * Write bytes to a 7-bit I2C `address`.
      */
-    //% shim=pins::i2cWriteBuffer
+    //% repeat.defl=0 shim=pins::i2cWriteBuffer
     function i2cWriteBuffer(address: int32, buf: Buffer, repeat?: boolean): int32;
 
     /**
@@ -140,36 +146,34 @@ namespace futureboard {
         //% block="M2"
         M2 = 2,
     }
+    const DA213ADDR = 39
+
+    // export function onboardPixel(){
+    //     let s = light.createNeoPixelStrip(pins.RGB, 3)
+    //     s._clkPin = pins.DUMMY
+    //     return s
+    // }
 
     export function initImu(){
-        let whoami = pins.i2cReadRegister(0x19, 0x0f)
-        let ver = pins.i2cReadRegister(0x19, 0x70)
-        // power down
-        pins.i2cWriteRegister(0x19, 0x20, 0x00)
-        // soft reset
-        pins.i2cWriteRegister(0x19, 0x23, 0x80)
-        pause(100)
-        pins.i2cWriteRegister(0x19, 0x24, 0x80)
-        pins.i2cWriteRegister(0x19, 0x68, 0xa5)
-        pause(100)
-        pins.i2cWriteRegister(0x19, 0x1f, 0x01) // high power mode
-        pins.i2cWriteRegister(0x19, 0x23, 0x80) // dlpf open
-        pins.i2cWriteRegister(0x19, 0x2e, 0x00)
-        pins.i2cWriteRegister(0x19, 0x21, 0x00)
-        pins.i2cWriteRegister(0x19, 0x24, 0x80)
-
-        pins.i2cWriteRegister(0x19, 0x25, 0x02)
-        pins.i2cWriteRegister(0x19, 0x2e, 0x9f)
-
-        pins.i2cWriteRegister(0x19, 0x20, 0x37)
-        pins.i2cWriteRegister(0x19, 0x22, 0x00)
-        pins.i2cWriteRegister(0x19, 0x57, 0x00)
-        return whoami
+        // init da213
+        pins.i2cWriteRegister(DA213ADDR, 0x7f, 0x83)
+        pins.i2cWriteRegister(DA213ADDR, 0x7f, 0x69)
+        pins.i2cWriteRegister(DA213ADDR, 0x7f, 0xbd)
+        let a = pins.i2cReadRegister(DA213ADDR, 0x8e)
+        if (a == 0){
+            pins.i2cWriteRegister(DA213ADDR, 0x8e, 0x50)
+        }
+        pins.i2cWriteRegister(DA213ADDR, 0x0f, 0x40)
+        pins.i2cWriteRegister(DA213ADDR, 0x20, 0x00)
+        pins.i2cWriteRegister(DA213ADDR, 0x11, 0x34)
+        pins.i2cWriteRegister(DA213ADDR, 0x10, 0x07)
+        pins.i2cWriteRegister(DA213ADDR, 0x1a, 0x04)
+        pins.i2cWriteRegister(DA213ADDR, 0x15, 0x04)
     }
 
-    export function getAccel(){
-        pins.i2cWriteNumber(0x19, 0xa8, NumberFormat.UInt8LE);
-        let data = pins.i2cReadBuffer(0x19, 6)
+    export function readImu(){
+        pins.i2cWriteNumber(DA213ADDR, 0x02, NumberFormat.UInt8LE);
+        let data = pins.i2cReadBuffer(DA213ADDR, 6);
         let x = data.getNumber(NumberFormat.Int16LE, 0)
         let y = data.getNumber(NumberFormat.Int16LE, 2)
         let z = data.getNumber(NumberFormat.Int16LE, 4)
@@ -200,5 +204,5 @@ namespace futureboard {
         let v_us = (angle - 90) * 20 / 3 + 1500
         pins.servoSetPulse(port, v_us)
     }
-    
+
 }

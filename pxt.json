@@ -6,7 +6,8 @@
         "device": "*"
     },
     "files": [
-        "futurebox.ts"
+        "futurebox.ts",
+        "fbvm.cpp"
     ],
     "public": true,
     "targetVersions": {
