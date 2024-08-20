@@ -1,0 +1,19 @@
+{
+    "name": "futureboard",
+    "version": "0.0.0",
+    "description": "",
+    "dependencies": {
+        "device": "*"
+    },
+    "files": [
+        "futurebox.ts"
+    ],
+    "public": true,
+    "targetVersions": {
+        "targetId": "arcade"
+    },
+    "supportedTargets": [
+        "arcade"
+    ],
+    "preferredEditor": "tsprj"
+}
