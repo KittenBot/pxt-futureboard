@@ -128,7 +128,7 @@ namespace pins {
     }
 }
 
-
+//% icon="\uf916" color="#00a0a0"
 namespace futureboard {
     const isSim = control.deviceDalVersion() === 'sim'
     export enum Port {
@@ -195,11 +195,11 @@ namespace futureboard {
             p2 = 21
         }
         if (speed >= 0) {
-            pins.analogWritePin(p1, speed * 16) // 256 > 4096
-            pins.analogWritePin(p2, 0)
+            analogWrite(p1, speed * 16) // 256 > 4096
+            analogWrite(p2, 0)
         } else {
-            pins.analogWritePin(p1, 0)
-            pins.analogWritePin(p2, -speed * 16)
+            analogWrite(p1, 0)
+            analogWrite(p2, -speed * 16)
         }
     }
 
@@ -207,33 +207,41 @@ namespace futureboard {
     //% angle.min=0 angle.max=180
     export function geekServo(port: Port, angle: number) {
         let v_us = (angle - 90) * 20 / 3 + 1500
-        pins.servoSetPulse(port, v_us)
+        servoPulse(port, v_us)
     }
 
+    //% blockId=futurebox_digiread block="digital read|port %port"
     export function digiRead(port: Port): number{
         if (isSim)
             return 0
         return pins.digitalReadPin(port)
     }
 
+    //% blockId=futurebox_analogread block="analog read|port %port"
     export function analogRead(port: Port): number {
         if (isSim)
             return 0
         return pins.analogReadPin(port)
     }
 
+    //% blockId=futurebox_digiwrite block="digital read|port %port|to %value"
+    //% value.min=0 value.max=1
     export function digiWrite(port: Port, value: number){
         if (isSim)
             return
         return pins.digitalWritePin(port, value)
     }
 
+    //% blockId=futurebox_analogwrite block="analog write|port %port|to %value"
+    //% value.min=0 value.max=1023
     export function analogWrite(port: Port, value: number) {
         if (isSim)
             return
         return pins.analogWritePin(port, value)
     }
 
+    //% blockId=futurebox_servopulse block="servo set pulse|port %port|to (µs) %value"
+    //% advanced=true
     export function servoPulse(port: Port, value: number) {
         if (isSim)
             return
