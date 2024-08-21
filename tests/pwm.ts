@@ -5,7 +5,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         a = 0
     }
     console.log("Value: " + a)
-    pins.analogWritePin(futureboard.Port.P1, a)
+    futureboard.analogWrite(futureboard.Port.P1, a)
 })
 
 
@@ -15,5 +15,5 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         a = 4096
     }
     console.log("Value: " + a)
-    pins.analogWritePin(futureboard.Port.P1, a)
+    futureboard.analogWrite(futureboard.Port.P1, a)
 })

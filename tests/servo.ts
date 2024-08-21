@@ -12,7 +12,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         a = 180
     }
     console.log("Value: " + a)
-    pins.servoSetPulse(futureboard.Port.P1, degreeToPulse(a))
+    futureboard.servoPulse(futureboard.Port.P1, degreeToPulse(a))
 })
 
 
@@ -22,5 +22,5 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         a = 0
     }
     console.log("Value: " + a)
-    pins.servoSetPulse(futureboard.Port.P1, degreeToPulse(a))
+    futureboard.servoPulse(futureboard.Port.P1, degreeToPulse(a))
 })

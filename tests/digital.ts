@@ -1,6 +1,6 @@
 let a = 0
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    pins.digitalWritePin(futureboard.Port.P1, a)
+    futureboard.digiWrite(futureboard.Port.P1, a)
     if (a == 0) {
         a = 1
     } else {
@@ -10,6 +10,6 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 
 
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    let b = pins.digitalReadPin(futureboard.Port.P2)
+    let b = futureboard.digiRead(futureboard.Port.P2)
     console.log("B: " + b)
 })
