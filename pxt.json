@@ -7,11 +7,14 @@
     },
     "files": [
         "futurebox.ts",
-        "fbvm.cpp"
+        "shims.d.ts",
+        "fbvm.cpp",
+        "enums.d.ts"
     ],
     "public": true,
     "targetVersions": {
-        "targetId": "arcade"
+        "targetId": "arcade",
+        "target": "1.12.56"
     },
     "supportedTargets": [
         "arcade"

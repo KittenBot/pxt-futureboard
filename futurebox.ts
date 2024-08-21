@@ -4,7 +4,7 @@ declare namespace pins {
 
     // // % fixedInstance shim=pxt::getPin(49)
     // const DUMMY: DigitalInOutPin;
-    
+
     /**
      * Read `size` bytes from a 7-bit I2C `address`.
      */
@@ -130,6 +130,7 @@ namespace pins {
 
 
 namespace futureboard {
+    const isSim = control.deviceDalVersion() === 'sim'
     export enum Port {
         //% block="P1"
         P1 = 4,
@@ -155,6 +156,8 @@ namespace futureboard {
     // }
 
     export function initImu(){
+        if (isSim)
+            return
         // init da213
         pins.i2cWriteRegister(DA213ADDR, 0x7f, 0x83)
         pins.i2cWriteRegister(DA213ADDR, 0x7f, 0x69)
@@ -172,6 +175,8 @@ namespace futureboard {
     }
 
     export function readImu(){
+        if (isSim)
+            return [0,0,0]
         pins.i2cWriteNumber(DA213ADDR, 0x02, NumberFormat.UInt8LE);
         let data = pins.i2cReadBuffer(DA213ADDR, 6);
         let x = data.getNumber(NumberFormat.Int16LE, 0)
@@ -203,6 +208,36 @@ namespace futureboard {
     export function geekServo(port: Port, angle: number) {
         let v_us = (angle - 90) * 20 / 3 + 1500
         pins.servoSetPulse(port, v_us)
+    }
+
+    export function digiRead(port: Port): number{
+        if (isSim)
+            return 0
+        return pins.digitalReadPin(port)
+    }
+
+    export function analogRead(port: Port): number {
+        if (isSim)
+            return 0
+        return pins.analogReadPin(port)
+    }
+
+    export function digiWrite(port: Port, value: number){
+        if (isSim)
+            return
+        return pins.digitalWritePin(port, value)
+    }
+
+    export function analogWrite(port: Port, value: number) {
+        if (isSim)
+            return
+        return pins.analogWritePin(port, value)
+    }
+
+    export function servoPulse(port: Port, value: number) {
+        if (isSim)
+            return
+        return pins.servoSetPulse(port, value)
     }
 
 }
