@@ -9,7 +9,8 @@
         "futurebox.ts",
         "shims.d.ts",
         "fbvm.cpp",
-        "enums.d.ts"
+        "enums.d.ts",
+        "aht20.ts"
     ],
     "public": true,
     "targetVersions": {

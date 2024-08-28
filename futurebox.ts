@@ -248,4 +248,30 @@ namespace futureboard {
         return pins.servoSetPulse(port, value)
     }
 
+    export enum EnvType {
+        //% block="Temperature(℃)"
+        Temperature = 0,
+        //% block="Humidity(%RH)"
+        Humidity = 1
+    }
+
+    let sugarTempHumInit = false;
+    let sugarTempHum: SguarTempHum;
+    //% blockId=als block="(ENV) get %env"
+    //% subcategory="I2C" weight=84
+    export function readData(env: EnvType): number {
+
+        if (!sugarTempHumInit) {
+            sugarTempHum = new SguarTempHum()
+            sugarTempHumInit = true
+        }
+        sugarTempHum.update()
+        if(env){
+            return sugarTempHum.hum
+        }
+        return sugarTempHum.temp
+    }
+
+    
+
 }
