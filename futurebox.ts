@@ -19,7 +19,7 @@ declare namespace pins {
 
     /**
      * Read the specified pin or connector as either 0 or 1
-     * @param name pin to read from, eg: DigitalPin.P0
+     * @param name pin to read from, eg: Port.P0
      */
     //% help=pins/digital-read-pin weight=30
     //% blockId=device_get_digital_pin block="digital read|pin %name" blockGap=8
@@ -28,7 +28,7 @@ declare namespace pins {
 
     /**
      * Set a pin or connector value to either 0 or 1.
-     * @param name pin to write to, eg: DigitalPin.P0
+     * @param name pin to write to, eg: Port.P0
      * @param value value to set on the pin, 1 eg,0
      */
     //% help=pins/digital-write-pin weight=29
@@ -39,7 +39,7 @@ declare namespace pins {
 
     /**
      * Read the connector value as analog, that is, as a value comprised between 0 and 1023.
-     * @param name pin to write to, eg: AnalogPin.P0
+     * @param name pin to write to, eg: Port.P0
      */
     //% help=pins/analog-read-pin weight=25
     //% blockId=device_get_analog_pin block="analog read|pin %name" blockGap="8"
@@ -48,7 +48,7 @@ declare namespace pins {
 
     /**
      * Set the connector value as analog. Value must be comprised between 0 and 1023.
-     * @param name pin name to write to, eg: AnalogPin.P0
+     * @param name pin name to write to, eg: Port.P0
      * @param value value to write to the pin between ``0`` and ``1023``. eg:1023,0
      */
     //% help=pins/analog-write-pin weight=24
@@ -59,7 +59,7 @@ declare namespace pins {
 
     /**
      * Configure the pull direction of of a pin.
-     * @param name pin to set the pull mode on, eg: DigitalPin.P0
+     * @param name pin to set the pull mode on, eg: Port.P0
      * @param pull one of the mbed pull configurations, eg: PinPullMode.PullUp
      */
     //% help=pins/set-pull advanced=true
@@ -73,7 +73,7 @@ declare namespace pins {
     /**
      * Configure the pulse-width modulation (PWM) period of the analog output in microseconds.
      * If this pin is not configured as an analog output (using `analog write pin`), the operation has no effect.
-     * @param name analog pin to set period to, eg: AnalogPin.P0
+     * @param name analog pin to set period to, eg: Port.P0
      * @param micros period in microseconds. eg:20000
      */
     //% help=pins/analog-set-period weight=23 blockGap=8
@@ -156,8 +156,7 @@ namespace futureboard {
     // }
 
     export function initImu(){
-        if (isSim)
-            return
+        if (isSim) return;
         // init da213
         pins.i2cWriteRegister(DA213ADDR, 0x7f, 0x83)
         pins.i2cWriteRegister(DA213ADDR, 0x7f, 0x69)
@@ -175,8 +174,7 @@ namespace futureboard {
     }
 
     export function readImu(){
-        if (isSim)
-            return [0,0,0]
+        if (isSim) return [0,0,0];
         pins.i2cWriteNumber(DA213ADDR, 0x02, NumberFormat.UInt8LE);
         let data = pins.i2cReadBuffer(DA213ADDR, 6);
         let x = data.getNumber(NumberFormat.Int16LE, 0)
@@ -212,39 +210,34 @@ namespace futureboard {
 
     //% blockId=futurebox_digiread block="digital read|port %port"
     export function digiRead(port: Port): boolean{
-        if (isSim)
-            return false
+        if (isSim) return false;
         return pins.digitalReadPin(port) == 1
     }
 
     //% blockId=futurebox_analogread block="analog read|port %port"
     export function analogRead(port: Port): number {
-        if (isSim)
-            return 0
+        if (isSim) return 0;
         return pins.analogReadPin(port)
     }
 
     //% blockId=futurebox_digiwrite block="digital write|port %port|to %value"
     //% value.min=0 value.max=1
     export function digiWrite(port: Port, value: number){
-        if (isSim)
-            return
+        if (isSim) return;
         return pins.digitalWritePin(port, value)
     }
 
     //% blockId=futurebox_analogwrite block="analog write|port %port|to %value"
     //% value.min=0 value.max=1023
     export function analogWrite(port: Port, value: number) {
-        if (isSim)
-            return
+        if (isSim) return;
         return pins.analogWritePin(port, value)
     }
 
     //% blockId=futurebox_servopulse block="servo set pulse|port %port|to (µs) %value"
     //% advanced=true
     export function servoPulse(port: Port, value: number) {
-        if (isSim)
-            return
+        if (isSim) return;
         return pins.servoSetPulse(port, value)
     }
 
@@ -256,44 +249,118 @@ namespace futureboard {
     }
 
     //% blockId=button block="(Button) pressed %pin "
-    //% subcategory="sugar-base" weight=99
+    //% subcategory="sugar-digital" weight=99
     export function sugarButton(pin: Port): boolean {
-        if (isSim)
-            return true
+        if (isSim) return true;
         //pins.setPull(pin, PinPullMode.PullUp)
         return pins.digitalReadPin(pin) == 0
         
     }
 
     //% blockId=tracer block="(Tracker) black dectected %pin"
-    //% subcategory="sugar-base" weight=98
+    //% subcategory="sugar-digital" weight=98
     export function sugarTracker(pin: Port): boolean {
-        if (isSim)
-            return false
+        if (isSim) return false;
         return pins.digitalReadPin(pin) == 1
     }
+
     //% blockId=hall block="(Hall) magnetic detected %pin"
-    //% subcategory="sugar-base" weight=97
+    //% subcategory="sugar-digital" weight=97
     export function sugarHall(pin: Port): boolean {
-        if (isSim)
-            return true
+        if (isSim) return true;
         return pins.digitalReadPin(pin) == 0
     }
 
     //% blockId=Crash block="(Crash) crash detected %pin "
-    //% subcategory="sugar-base" weight=96
+    //% subcategory="sugar-digital" weight=96
     export function sugarCrash(pin: Port): boolean {
-        if (isSim)
-            return false
+        if (isSim) return false;
         return pins.digitalReadPin(pin) == 1
     }
 
     //% blockId=Touch block="(Touch) touch detected %pin "
-    //% subcategory="sugar-base" weight=95
+    //% subcategory="sugar-digital" weight=95
     export function sugarTouch(pin: Port): boolean {
-        if (isSim)
-            return false
+        if (isSim) return false;
         return pins.digitalReadPin(pin) == 1
+    }
+
+    //% blockId=pir block="(PIR) motion detected %pin"
+    //% subcategory="sugar-digital" weight=94
+    export function sugarPIR(pin: Port): boolean {
+        if (isSim) return false;
+        return pins.digitalReadPin(pin) == 1
+    }
+
+    //% blockId=flameBool block="(Flame) fire Detected %pin "
+    //% subcategory="sugar-digital" weight=93
+    export function sugarFlameDigi(pin: Port): boolean {
+        if (isSim) return false;
+        return pins.digitalReadPin(pin) == 1
+    }
+
+    //% blockId=rain block="(WaterLevel) value %pin"
+    //% subcategory="sugar-digital" weight=92
+    export function sugarWaterLevelDigi(pin: Port): boolean {
+        if (isSim) return false;
+        return pins.digitalReadPin(pin) == 1
+    }
+
+    export enum LEDSta {
+        //% block="OFF"
+        Off = 0,
+        //% block="ON"
+        On = 1
+    }
+
+    export enum Switch {
+        //% block="OFF"
+        Off = 0,
+        //% block="ON"
+        On = 1
+    }
+
+    //% blockId=led_toggle block="(LED) %pin| %onoff"
+    //% subcategory="sugar-digital" weight=91
+    export function ledOnoff(pin: Port, onoff: LEDSta) {
+        pins.digitalWritePin(pin, onoff ? 1 : 0)
+    }
+
+    //% blockId=led_luminent block="(LED) %pin| set brightness(0-1023) %value"
+    //% value.min=0 value.max=1023 value.defl=0
+    //% subcategory="sugar-digital" weight=90
+    export function ledLuminent(pin: Port, value: number) {
+        pins.analogWritePin(pin, value)
+    }
+
+    //% blockId=string_lights_toggle block="(String Lights) %pin| %onoff"
+    //% subcategory="sugar-digital" weight=89
+    export function StringLightsOnoff(pin: Port, onoff: LEDSta) {
+        pins.digitalWritePin(pin, onoff ? 1 : 0)
+    }
+
+    //% blockId=Buzzer block="(Active Buzzer) %pin| sound %onoff"
+    //% subcategory="sugar-digital" weight=88
+    export function Buzzer(pin: Port, onoff: Switch) {
+        pins.digitalWritePin(pin, onoff ? 1 : 0)
+    }
+
+    //% blockId=Laser block="(Laser) %pin| %onoff"
+    //% subcategory="sugar-digital" weight=87
+    export function Laser(pin: Port, onoff: Switch) {
+        pins.digitalWritePin(pin, onoff ? 1 : 0)
+    }
+
+    //% blockId=vibeMotor block="(Vibe Motor) %pin| %onoff"
+    //% subcategory="sugar-digital" weight=86
+    export function vibeMotor(pin: Port, onoff: Switch) {
+        pins.digitalWritePin(pin, onoff ? 1 : 0)
+    }
+
+    //% blockId=atomizer block="(Atomizer) %pin| %onoff"
+    //% subcategory="sugar-digital" weight=85
+    export function atomizer(pin: Port, onoff: Switch) {
+        pins.digitalWritePin(pin, onoff ? 1 : 0)
     }
 
     let sugarTempHumInit = false;
