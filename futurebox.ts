@@ -322,7 +322,7 @@ namespace futureboard {
 
     //% blockId=led_toggle block="(LED) %pin| %onoff"
     //% subcategory="sugar-digital" weight=91
-    export function ledOnoff(pin: Port, onoff: LEDSta) {
+    export function sugarledOnoff(pin: Port, onoff: LEDSta) {
         if (isSim) return;
         pins.digitalWritePin(pin, onoff ? 1 : 0)
     }
@@ -330,42 +330,42 @@ namespace futureboard {
     //% blockId=led_luminent block="(LED) %pin| set brightness(0-1023) %value"
     //% value.min=0 value.max=1023 value.defl=0
     //% subcategory="sugar-digital" weight=90
-    export function ledLuminent(pin: Port, value: number) {
+    export function sugarLedLuminent(pin: Port, value: number) {
         if (isSim) return;
         pins.analogWritePin(pin, value)
     }
 
     //% blockId=string_lights_toggle block="(String Lights) %pin| %onoff"
     //% subcategory="sugar-digital" weight=89
-    export function StringLightsOnoff(pin: Port, onoff: LEDSta) {
+    export function sugarStringLightsOnoff(pin: Port, onoff: LEDSta) {
         if (isSim) return;
         pins.digitalWritePin(pin, onoff ? 1 : 0)
     }
 
     //% blockId=Buzzer block="(Active Buzzer) %pin| sound %onoff"
     //% subcategory="sugar-digital" weight=88
-    export function Buzzer(pin: Port, onoff: Switch) {
+    export function sugarBuzzer(pin: Port, onoff: Switch) {
         if (isSim) return;
         pins.digitalWritePin(pin, onoff ? 1 : 0)
     }
 
     //% blockId=Laser block="(Laser) %pin| %onoff"
     //% subcategory="sugar-digital" weight=87
-    export function Laser(pin: Port, onoff: Switch) {
+    export function sugarLaser(pin: Port, onoff: Switch) {
         if (isSim) return;
         pins.digitalWritePin(pin, onoff ? 1 : 0)
     }
 
     //% blockId=vibeMotor block="(Vibe Motor) %pin| %onoff"
     //% subcategory="sugar-digital" weight=86
-    export function vibeMotor(pin: Port, onoff: Switch) {
+    export function sugarVibeMotor(pin: Port, onoff: Switch) {
         if (isSim) return;
         pins.digitalWritePin(pin, onoff ? 1 : 0)
     }
 
     //% blockId=atomizer block="(Atomizer) %pin| %onoff"
     //% subcategory="sugar-digital" weight=85
-    export function atomizer(pin: Port, onoff: Switch) {
+    export function sugarAtomizer(pin: Port, onoff: Switch) {
         if (isSim) return;
         pins.digitalWritePin(pin, onoff ? 1 : 0)
     }
@@ -448,7 +448,6 @@ namespace futureboard {
 
     //% blockId=joyValue block="(Joystick) value %dir"
     //% subcategory="sugar-i2c" weight=70
-
     export function joyValue(dir: DirType): number {
         if (!sugarJoystickInit) sugarJoystick = new SugarJoyStick();
         sugarJoystick.joyValue()

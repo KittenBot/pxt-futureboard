@@ -1,6 +1,6 @@
 {
     "name": "futureboard",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "",
     "dependencies": {
         "device": "*"
@@ -10,7 +10,9 @@
         "shims.d.ts",
         "fbvm.cpp",
         "enums.d.ts",
-        "sugar.ts"
+        "sugar.ts",
+        "_locales/zh-CN/futureboard-strings.json",
+        "_locales/zh-TW/futureboard-strings.json"
     ],
     "public": true,
     "targetVersions": {
