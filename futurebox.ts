@@ -211,10 +211,10 @@ namespace futureboard {
     }
 
     //% blockId=futurebox_digiread block="digital read|port %port"
-    export function digiRead(port: Port): number{
+    export function digiRead(port: Port): boolean{
         if (isSim)
-            return 0
-        return pins.digitalReadPin(port)
+            return false
+        return pins.digitalReadPin(port) == 1
     }
 
     //% blockId=futurebox_analogread block="analog read|port %port"
@@ -224,7 +224,7 @@ namespace futureboard {
         return pins.analogReadPin(port)
     }
 
-    //% blockId=futurebox_digiwrite block="digital read|port %port|to %value"
+    //% blockId=futurebox_digiwrite block="digital write|port %port|to %value"
     //% value.min=0 value.max=1
     export function digiWrite(port: Port, value: number){
         if (isSim)
@@ -253,6 +253,47 @@ namespace futureboard {
         Temperature = 0,
         //% block="Humidity(%RH)"
         Humidity = 1
+    }
+
+    //% blockId=button block="(Button) pressed %pin "
+    //% subcategory="sugar-base" weight=99
+    export function sugarButton(pin: Port): boolean {
+        if (isSim)
+            return true
+        //pins.setPull(pin, PinPullMode.PullUp)
+        return pins.digitalReadPin(pin) == 0
+        
+    }
+
+    //% blockId=tracer block="(Tracker) black dectected %pin"
+    //% subcategory="sugar-base" weight=98
+    export function sugarTracker(pin: Port): boolean {
+        if (isSim)
+            return false
+        return pins.digitalReadPin(pin) == 1
+    }
+    //% blockId=hall block="(Hall) magnetic detected %pin"
+    //% subcategory="sugar-base" weight=97
+    export function sugarHall(pin: Port): boolean {
+        if (isSim)
+            return true
+        return pins.digitalReadPin(pin) == 0
+    }
+
+    //% blockId=Crash block="(Crash) crash detected %pin "
+    //% subcategory="sugar-base" weight=96
+    export function sugarCrash(pin: Port): boolean {
+        if (isSim)
+            return false
+        return pins.digitalReadPin(pin) == 1
+    }
+
+    //% blockId=Touch block="(Touch) touch detected %pin "
+    //% subcategory="sugar-base" weight=95
+    export function sugarTouch(pin: Port): boolean {
+        if (isSim)
+            return false
+        return pins.digitalReadPin(pin) == 1
     }
 
     let sugarTempHumInit = false;
