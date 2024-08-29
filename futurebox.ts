@@ -128,7 +128,7 @@ namespace pins {
     }
 }
 
-//% icon="\uf916" color="#00a0a0"
+//% icon="\uf2d0" color="#00a0a0"
 namespace futureboard {
     const isSim = control.deviceDalVersion() === 'sim'
     export enum Port {
