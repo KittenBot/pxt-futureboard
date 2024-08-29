@@ -323,6 +323,7 @@ namespace futureboard {
     //% blockId=led_toggle block="(LED) %pin| %onoff"
     //% subcategory="sugar-digital" weight=91
     export function ledOnoff(pin: Port, onoff: LEDSta) {
+        if (isSim) return;
         pins.digitalWritePin(pin, onoff ? 1 : 0)
     }
 
@@ -330,36 +331,42 @@ namespace futureboard {
     //% value.min=0 value.max=1023 value.defl=0
     //% subcategory="sugar-digital" weight=90
     export function ledLuminent(pin: Port, value: number) {
+        if (isSim) return;
         pins.analogWritePin(pin, value)
     }
 
     //% blockId=string_lights_toggle block="(String Lights) %pin| %onoff"
     //% subcategory="sugar-digital" weight=89
     export function StringLightsOnoff(pin: Port, onoff: LEDSta) {
+        if (isSim) return;
         pins.digitalWritePin(pin, onoff ? 1 : 0)
     }
 
     //% blockId=Buzzer block="(Active Buzzer) %pin| sound %onoff"
     //% subcategory="sugar-digital" weight=88
     export function Buzzer(pin: Port, onoff: Switch) {
+        if (isSim) return;
         pins.digitalWritePin(pin, onoff ? 1 : 0)
     }
 
     //% blockId=Laser block="(Laser) %pin| %onoff"
     //% subcategory="sugar-digital" weight=87
     export function Laser(pin: Port, onoff: Switch) {
+        if (isSim) return;
         pins.digitalWritePin(pin, onoff ? 1 : 0)
     }
 
     //% blockId=vibeMotor block="(Vibe Motor) %pin| %onoff"
     //% subcategory="sugar-digital" weight=86
     export function vibeMotor(pin: Port, onoff: Switch) {
+        if (isSim) return;
         pins.digitalWritePin(pin, onoff ? 1 : 0)
     }
 
     //% blockId=atomizer block="(Atomizer) %pin| %onoff"
     //% subcategory="sugar-digital" weight=85
     export function atomizer(pin: Port, onoff: Switch) {
+        if (isSim) return;
         pins.digitalWritePin(pin, onoff ? 1 : 0)
     }
 
