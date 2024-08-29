@@ -370,6 +370,42 @@ namespace futureboard {
         pins.digitalWritePin(pin, onoff ? 1 : 0)
     }
 
+    //% blockId=flameAnalog block="(Flame) value %pin"
+    //% subcategory="sugar-analog" weight=99
+    export function sugarFlameAna(pin: Port): number {
+        return pins.analogReadPin(pin)
+    }
+    //% blockId=potential block="(Angle) value %pin"
+    //% subcategory="sugar-analog" weight=98
+    export function sugarAngle(pin: Port): number {
+        return pins.analogReadPin(pin)
+    }
+    //% blockId=audio block="(Audio) value %pin"
+    //% subcategory="sugar-analog" weight=97
+    export function sugaraudio(pin: Port): number {
+        return pins.analogReadPin(pin)
+    }
+    //% blockId=lightlvl block="(Light) value %pin"
+    //% subcategory="sugar-analog" weight=96
+    export function sugarLight(pin: Port): number {
+        return pins.analogReadPin(pin)
+    }
+    //% blockId=soilmoisture block="(SoilMoisture) value %pin"
+    //% subcategory="sugar-analog" weight=95
+    export function sugarSoilMoisture(pin: Port): number {
+        return pins.analogReadPin(pin)
+    }
+    //% blockId=grayscale block="(Grayscale) value %pin"
+    //% subcategory="sugar-analog" weight=94
+    export function sugargrayscale(pin: Port): number {
+        return pins.analogReadPin(pin)
+    }
+    //% blockId=waterlvl block="(WaterLevel) value %pin"
+    //% subcategory="sugar-analog" weight=93
+    export function sugarWaterLevelAna(pin: Port): number {
+        return pins.analogReadPin(pin)
+    }
+
     let sugarTempHumInit = false;
     let sugarTempHum: SugarTempHum;
     //% blockId=als block="(ENV) get %env"
