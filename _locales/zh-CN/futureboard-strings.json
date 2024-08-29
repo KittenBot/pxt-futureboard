@@ -31,5 +31,5 @@
     "futureboard.envReadData|block": "(ENV)获取 %env",
     "futureboard.joyState|block": "(JoyStick) 遥感状态 %state",
     "futureboard.tofDistance|block": "(TOF) 检测距离(mm)",
-    "futureboard.joyValue|block": "(TOF) %dir 坐标值"
+    "futureboard.joyValue|block": "(JoyStick) %dir 坐标值"
 }
