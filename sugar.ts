@@ -57,3 +57,18 @@ class SugarJoyStick {
     }
 
 }
+
+const VL53L0X_ADDR = 0x5e;
+
+class SugarTOF {
+    constructor() {
+        pins.i2cWriteBuffer(VL53L0X_ADDR, Buffer.fromArray([0x01]))
+        control.waitMicros(50)
+    }
+
+    distance(): number {
+        pins.i2cWriteNumber(VL53L0X_ADDR, 0x1, NumberFormat.UInt8BE);
+        return pins.i2cReadNumber(VL53L0X_ADDR, NumberFormat.UInt16LE);
+    }
+
+}

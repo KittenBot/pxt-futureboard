@@ -303,5 +303,14 @@ namespace futureboard {
         sugarJoystick.joyValue()
         return dir === DirType.X ? sugarJoystick.coordX : sugarJoystick.coordY
     }
+    
+    let sugarTOFInit = false;
+    let sugarTOF: SugarTOF;
+    //% blockId=tof block="(TOF Distance) distance(mm)"
+    //% subcategory="I2C" weight=76
+    export function TOFDistance(): number {
+        if (!sugarTOFInit) sugarTOF = new SugarTOF();
+        return sugarTOF.distance();
+    }
 
 }
