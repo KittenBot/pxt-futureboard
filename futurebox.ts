@@ -135,9 +135,9 @@ namespace futureboard {
         //% block="P1"
         P1 = 4,
         //% block="P2"
-        P2 = 7,
+        P2 = 5,
         //% block="P3"
-        P3 = 5,
+        P3 = 7,
         //% block="P4"
         P4 = 6,
     }
@@ -258,8 +258,8 @@ namespace futureboard {
     let sugarTempHumInit = false;
     let sugarTempHum: SugarTempHum;
     //% blockId=als block="(ENV) get %env"
-    //% subcategory="I2C" weight=84
-    export function readData(env: EnvType): number {
+    //% subcategory="sugar-i2c" weight=84
+    export function envReadData(env: EnvType): number {
 
         if (!sugarTempHumInit) {
             sugarTempHum = new SugarTempHum()
@@ -288,7 +288,7 @@ namespace futureboard {
     let sugarJoystickInit = false;
     let sugarJoystick: SugarJoyStick;
     //% blockId=joyState block="(Joystick) state %state triggered"
-    //% subcategory="I2C" weight=71
+    //% subcategory="sugar-i2c" weight=71
     export function joyState(state: JoystickDir): boolean {
         if (!sugarJoystickInit) sugarJoystick = new SugarJoyStick();
         sugarJoystick.joyState()
@@ -296,7 +296,7 @@ namespace futureboard {
     }
 
     //% blockId=joyValue block="(Joystick) value %dir"
-    //% subcategory="I2C" weight=70
+    //% subcategory="sugar-i2c" weight=70
 
     export function joyValue(dir: DirType): number {
         if (!sugarJoystickInit) sugarJoystick = new SugarJoyStick();
@@ -307,8 +307,8 @@ namespace futureboard {
     let sugarTOFInit = false;
     let sugarTOF: SugarTOF;
     //% blockId=tof block="(TOF Distance) distance(mm)"
-    //% subcategory="I2C" weight=76
-    export function TOFDistance(): number {
+    //% subcategory="sugar-i2c" weight=76
+    export function tofDistance(): number {
         if (!sugarTOFInit) sugarTOF = new SugarTOF();
         return sugarTOF.distance();
     }
