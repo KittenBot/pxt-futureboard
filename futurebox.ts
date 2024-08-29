@@ -256,13 +256,13 @@ namespace futureboard {
     }
 
     let sugarTempHumInit = false;
-    let sugarTempHum: SguarTempHum;
+    let sugarTempHum: SugarTempHum;
     //% blockId=als block="(ENV) get %env"
     //% subcategory="I2C" weight=84
     export function readData(env: EnvType): number {
 
         if (!sugarTempHumInit) {
-            sugarTempHum = new SguarTempHum()
+            sugarTempHum = new SugarTempHum()
             sugarTempHumInit = true
         }
         sugarTempHum.update()
@@ -272,6 +272,36 @@ namespace futureboard {
         return sugarTempHum.temp
     }
 
-    
+    export enum JoystickDir {
+        pressed = 1,
+        left = 0x10,
+        right = 0x8,
+        up = 0x4,
+        down = 0x2
+    }
+
+    export enum DirType {
+        X = 0,
+        Y = 1
+    }
+
+    let sugarJoystickInit = false;
+    let sugarJoystick: SugarJoyStick;
+    //% blockId=joyState block="(Joystick) state %state triggered"
+    //% subcategory="I2C" weight=71
+    export function joyState(state: JoystickDir): boolean {
+        if (!sugarJoystickInit) sugarJoystick = new SugarJoyStick();
+        sugarJoystick.joyState()
+        return sugarJoystick.sta == state
+    }
+
+    //% blockId=joyValue block="(Joystick) value %dir"
+    //% subcategory="I2C" weight=70
+
+    export function joyValue(dir: DirType): number {
+        if (!sugarJoystickInit) sugarJoystick = new SugarJoyStick();
+        sugarJoystick.joyValue()
+        return dir === DirType.X ? sugarJoystick.coordX : sugarJoystick.coordY
+    }
 
 }

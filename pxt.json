@@ -10,7 +10,7 @@
         "shims.d.ts",
         "fbvm.cpp",
         "enums.d.ts",
-        "aht20.ts"
+        "sugar.ts"
     ],
     "public": true,
     "targetVersions": {
