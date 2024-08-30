@@ -36,4 +36,8 @@ namespace pins {
     void setPull(int name, PinPullMode pull) {
     }
 
+    //%
+    int pulseIn(int name, int pulse, int maxDuration = 2000000) {
+    }
+
 }

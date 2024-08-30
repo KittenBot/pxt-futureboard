@@ -92,6 +92,21 @@ declare namespace pins {
     //% group="Servo" shim=pins::servoSetPulse
     function servoSetPulse(name: int32, micros: int32): void;
 
+    /**
+     * Return the duration of a pulse at a pin in microseconds.
+     * @param name the pin which measures the pulse, eg: DigitalPin.P0
+     * @param value the value of the pulse, eg: PulseValue.High
+     * @param maximum duration in microseconds
+     */
+    //% blockId="pins_pulse_in" block="pulse in (µs)|pin %name|pulsed %value"
+    //% weight=20 advanced=true
+    //% help=pins/pulse-in
+    //% name.shadow=digital_pin_shadow
+    //% group="Pulse"
+    //% weight=23
+    //% blockGap=8 maxDuration.defl=2000000 shim=pins::pulseIn
+    function pulseIn(name: int32, value: int32, maxDuration?: int32): int32;
+
 }
 
 namespace pins {
@@ -239,6 +254,16 @@ namespace futureboard {
     export function servoPulse(port: Port, value: number) {
         if (isSim) return;
         return pins.servoSetPulse(port, value)
+    }
+
+    //% blockId=futurebox_ultrasonic block="distance|port %port"
+    //% value.min=0 value.max=1
+    export function distance(port: Port): number {
+        if (isSim) return 0;
+        pins.digitalWritePin(port, 1)
+        pause(1)
+        pins.digitalWritePin(port, 0)
+        return pins.pulseIn(port, 1)
     }
 
     export enum EnvType {
