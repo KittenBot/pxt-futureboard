@@ -1,10 +1,4 @@
 declare namespace pins {
-    // //% fixedInstance shim=pxt::getPin(3)
-    // const RGB: DigitalInOutPin;
-
-    // // % fixedInstance shim=pxt::getPin(49)
-    // const DUMMY: DigitalInOutPin;
-
     /**
      * Read `size` bytes from a 7-bit I2C `address`.
      */
@@ -158,6 +152,7 @@ namespace pins {
 //% icon="\uf2d0" color="#00a0a0"
 namespace futureboard {
     const isSim = control.deviceDalVersion() === 'sim'
+    export const rgb = neopixel.create(3, 3, NeoPixelMode.RGB)
     export enum Port {
         //% block="P1"
         P1 = 4,
@@ -175,12 +170,6 @@ namespace futureboard {
         M2 = 2,
     }
     const DA213ADDR = 39
-
-    // export function onboardPixel(){
-    //     let s = light.createNeoPixelStrip(pins.RGB, 3)
-    //     s._clkPin = pins.DUMMY
-    //     return s
-    // }
 
     export function initImu(){
         if (isSim) return;
