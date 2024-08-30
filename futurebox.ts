@@ -109,6 +109,18 @@ declare namespace pins {
 
 }
 
+
+declare namespace light {
+    /**
+     * Send a programmable light buffer to the specified digital pin
+     * @param pin The pin that the lights are connected to
+     * @param buf The buffer to send to the pin
+     */
+    //% shim=light::sendBuffer1
+    function sendBuffer1(pin: number, buf: Buffer): void;
+}
+
+
 namespace pins {
     export function i2cReadNumber(address: number, format: NumberFormat, repeated?: boolean): number {
         const buf = pins.i2cReadBuffer(address, pins.sizeOf(format), repeated)

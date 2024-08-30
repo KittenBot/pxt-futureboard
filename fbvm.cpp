@@ -41,3 +41,9 @@ namespace pins {
     }
 
 }
+
+namespace light {
+    //%
+    void sendBuffer1(int pin, Buffer buf){
+    }
+}

@@ -7,12 +7,14 @@
     },
     "files": [
         "futurebox.ts",
+        "neopixel.ts",
         "shims.d.ts",
         "fbvm.cpp",
         "enums.d.ts",
         "sugar.ts",
         "_locales/zh-CN/futureboard-strings.json",
-        "_locales/zh-TW/futureboard-strings.json"
+        "_locales/zh-TW/futureboard-strings.json",
+        "neopixel.ts"
     ],
     "public": true,
     "targetVersions": {
