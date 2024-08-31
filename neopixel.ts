@@ -248,6 +248,7 @@ namespace neopixel {
         //% weight=79
         //% parts="neopixel"
         show() {
+            if (futureboard.isSim) return
             light.sendBuffer1(this.pin, this.buf);
         }
 

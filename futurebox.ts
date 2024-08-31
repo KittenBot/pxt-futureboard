@@ -151,7 +151,7 @@ namespace pins {
 
 //% icon="\uf2d0" color="#00a0a0"
 namespace futureboard {
-    const isSim = control.deviceDalVersion() === 'sim'
+    export const isSim = control.deviceDalVersion() === 'sim'
     export const rgb = neopixel.create(3, 3, NeoPixelMode.RGB)
     export enum Port {
         //% block="P1"
