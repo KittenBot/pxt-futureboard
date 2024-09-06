@@ -9,13 +9,14 @@ class SugarDisplay {
         this._intensity = 3
         this.dbuf = [0, 0, 0, 0]
         this.on()
+        pins.i2cWriteNumber(0x24, 4|0x01, NumberFormat.Int8BE)
     }
 
     cmd(c: number) {
         pins.i2cWriteNumber(COMMAND_I2C_ADDRESS, c, NumberFormat.Int8BE)
     }
 
-    datWrite(bit: number, d: number) {
+    dat(bit: number, d: number) {
         pins.i2cWriteNumber(DISPLAY_I2C_ADDRESS + (bit % 4), d, NumberFormat.Int8BE)
     }
 
@@ -29,21 +30,21 @@ class SugarDisplay {
     }
 
     clear() {
-        this.datWrite(0, 0)
-        this.datWrite(1, 0)
-        this.datWrite(2, 0)
-        this.datWrite(3, 0)
+        this.dat(0, 0)
+        this.dat(1, 0)
+        this.dat(2, 0)
+        this.dat(3, 0)
         this.dbuf = [0, 0, 0, 0]
     }
 
     digit(num: number, bit: number) {
         this.dbuf[bit % 4] = _SEG[num % 16]
-        this.datWrite(bit, _SEG[num % 16])
+        this.dat(bit, _SEG[num % 16])
     }
 
     showNumber(num: number) {
         if (num < 0) {
-            this.datWrite(0, 0x40) // '-'
+            this.dat(0, 0x40) // '-'
             num = -num
         }
         else {
@@ -56,7 +57,7 @@ class SugarDisplay {
 
     showHex(num: number) {
         if (num < 0) {
-            this.datWrite(0, 0x40) // '-'
+            this.dat(0, 0x40) // '-'
             num = -num
         } else {
             this.digit((num >> 12) % 16, 0)
@@ -67,8 +68,8 @@ class SugarDisplay {
     }
 
     showDpAt(show: boolean, bit: number) {
-        if (show) this.datWrite(bit, this.dbuf[bit % 4] | 0x80)
-        else this.datWrite(bit, this.dbuf[bit % 4] & 0x7F)
+        if (show) this.dat(bit, this.dbuf[bit % 4] | 0x80)
+        else this.dat(bit, this.dbuf[bit % 4] & 0x7F)
     }
 
     setIntensity(dat: number) {

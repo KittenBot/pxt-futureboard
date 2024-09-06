@@ -92,7 +92,7 @@ declare namespace pins {
      * @param value the value of the pulse, eg: PulseValue.High
      * @param maximum duration in microseconds
      */
-    //% blockId="pins_pulse_in" block="pulse in (µs)|pin %name|pulsed %value"
+    //% blockId=pins__pulse_in" block="pulse in (µs)|pin %name|pulsed %value"
     //% weight=20 advanced=true
     //% help=pins/pulse-in
     //% name.shadow=digital_pin_shadow
@@ -274,7 +274,7 @@ namespace futureboard {
         Humidity = 1
     }
 
-    //% blockId=button block="(Button) pressed %pin "
+    //% blockId=sugar_button block="(Button) pressed %pin "
     //% subcategory="sugar-digital" weight=99
     export function sugarButton(pin: Port): boolean {
         if (isSim) return true;
@@ -283,49 +283,49 @@ namespace futureboard {
 
     }
 
-    //% blockId=tracer block="(Tracker) black dectected %pin"
+    //% blockId=sugar_tracker block="(Tracker) black dectected %pin"
     //% subcategory="sugar-digital" weight=98
     export function sugarTracker(pin: Port): boolean {
         if (isSim) return false;
         return pins.digitalReadPin(pin) == 1
     }
 
-    //% blockId=hall block="(Hall) magnetic detected %pin"
+    //% blockId=sugar_hall block="(Hall) magnetic detected %pin"
     //% subcategory="sugar-digital" weight=97
     export function sugarHall(pin: Port): boolean {
         if (isSim) return true;
         return pins.digitalReadPin(pin) == 0
     }
 
-    //% blockId=Crash block="(Crash) crash detected %pin "
+    //% blockId=sugar_crash block="(Crash) crash detected %pin "
     //% subcategory="sugar-digital" weight=96
     export function sugarCrash(pin: Port): boolean {
         if (isSim) return false;
         return pins.digitalReadPin(pin) == 1
     }
 
-    //% blockId=Touch block="(Touch) touch detected %pin "
+    //% blockId=sugar_touch block="(Touch) touch detected %pin "
     //% subcategory="sugar-digital" weight=95
     export function sugarTouch(pin: Port): boolean {
         if (isSim) return false;
         return pins.digitalReadPin(pin) == 1
     }
 
-    //% blockId=pir block="(PIR) motion detected %pin"
+    //% blockId=sugar_PIR block="(PIR) motion detected %pin"
     //% subcategory="sugar-digital" weight=94
     export function sugarPIR(pin: Port): boolean {
         if (isSim) return false;
         return pins.digitalReadPin(pin) == 1
     }
 
-    //% blockId=flameBool block="(Flame) fire Detected %pin "
+    //% blockId=sugar_flameDigi block="(Flame) fire Detected %pin "
     //% subcategory="sugar-digital" weight=93
     export function sugarFlameDigi(pin: Port): boolean {
         if (isSim) return false;
         return pins.digitalReadPin(pin) == 1
     }
 
-    //% blockId=rain block="(WaterLevel) value %pin"
+    //% blockId=sugar_waterLevelDigi block="(WaterLevel) value %pin"
     //% subcategory="sugar-digital" weight=92
     export function sugarWaterLevelDigi(pin: Port): boolean {
         if (isSim) return false;
@@ -346,14 +346,14 @@ namespace futureboard {
         On = 1
     }
 
-    //% blockId=led_toggle block="(LED) %pin| %onoff"
+    //% blockId=sugar_ledOnoff block="(LED) %pin| %onoff"
     //% subcategory="sugar-digital" weight=91
     export function sugarledOnoff(pin: Port, onoff: LEDSta) {
         if (isSim) return;
         pins.digitalWritePin(pin, onoff ? 1 : 0)
     }
 
-    //% blockId=led_luminent block="(LED) %pin| set brightness(0-1023) %value"
+    //% blockId=sugar_ledLuminent block="(LED) %pin| set brightness(0-1023) %value"
     //% value.min=0 value.max=1023 value.defl=0
     //% subcategory="sugar-digital" weight=90
     export function sugarLedLuminent(pin: Port, value: number) {
@@ -361,72 +361,72 @@ namespace futureboard {
         pins.analogWritePin(pin, value)
     }
 
-    //% blockId=string_lights_toggle block="(String Lights) %pin| %onoff"
+    //% blockId=sugar_stringLightsOnoff block="(String Lights) %pin| %onoff"
     //% subcategory="sugar-digital" weight=89
     export function sugarStringLightsOnoff(pin: Port, onoff: LEDSta) {
         if (isSim) return;
         pins.digitalWritePin(pin, onoff ? 1 : 0)
     }
 
-    //% blockId=Buzzer block="(Active Buzzer) %pin| sound %onoff"
+    //% blockId=sugar_buzzer block="(Active Buzzer) %pin| sound %onoff"
     //% subcategory="sugar-digital" weight=88
     export function sugarBuzzer(pin: Port, onoff: Switch) {
         if (isSim) return;
         pins.digitalWritePin(pin, onoff ? 1 : 0)
     }
 
-    //% blockId=Laser block="(Laser) %pin| %onoff"
+    //% blockId=sugar_laser block="(Laser) %pin| %onoff"
     //% subcategory="sugar-digital" weight=87
     export function sugarLaser(pin: Port, onoff: Switch) {
         if (isSim) return;
         pins.digitalWritePin(pin, onoff ? 1 : 0)
     }
 
-    //% blockId=vibeMotor block="(Vibe Motor) %pin| %onoff"
+    //% blockId=sugar_vibeMotor block="(Vibe Motor) %pin| %onoff"
     //% subcategory="sugar-digital" weight=86
     export function sugarVibeMotor(pin: Port, onoff: Switch) {
         if (isSim) return;
         pins.digitalWritePin(pin, onoff ? 1 : 0)
     }
 
-    //% blockId=atomizer block="(Atomizer) %pin| %onoff"
+    //% blockId=sugar_atomizer block="(Atomizer) %pin| %onoff"
     //% subcategory="sugar-digital" weight=85
     export function sugarAtomizer(pin: Port, onoff: Switch) {
         if (isSim) return;
         pins.digitalWritePin(pin, onoff ? 1 : 0)
     }
 
-    //% blockId=flameAnalog block="(Flame) value %pin"
+    //% blockId=sugar_flameAna block="(Flame) value %pin"
     //% subcategory="sugar-analog" weight=99
     export function sugarFlameAna(pin: Port): number {
         return pins.analogReadPin(pin)
     }
-    //% blockId=potential block="(Angle) value %pin"
+    //% blockId=sugar_angle block="(Angle) value %pin"
     //% subcategory="sugar-analog" weight=98
     export function sugarAngle(pin: Port): number {
         return pins.analogReadPin(pin)
     }
-    //% blockId=audio block="(Audio) value %pin"
+    //% blockId=sugar_audio block="(Audio) value %pin"
     //% subcategory="sugar-analog" weight=97
     export function sugaraudio(pin: Port): number {
         return pins.analogReadPin(pin)
     }
-    //% blockId=lightlvl block="(Light) value %pin"
+    //% blockId=sugar_light block="(Light) value %pin"
     //% subcategory="sugar-analog" weight=96
     export function sugarLight(pin: Port): number {
         return pins.analogReadPin(pin)
     }
-    //% blockId=soilmoisture block="(SoilMoisture) value %pin"
+    //% blockId=sugar_soilMoisture block="(SoilMoisture) value %pin"
     //% subcategory="sugar-analog" weight=95
     export function sugarSoilMoisture(pin: Port): number {
         return pins.analogReadPin(pin)
     }
-    //% blockId=grayscale block="(Grayscale) value %pin"
+    //% blockId=sugar_grayscale block="(Grayscale) value %pin"
     //% subcategory="sugar-analog" weight=94
     export function sugargrayscale(pin: Port): number {
         return pins.analogReadPin(pin)
     }
-    //% blockId=waterlvl block="(WaterLevel) value %pin"
+    //% blockId=sugar_waterLevelAna block="(WaterLevel) value %pin"
     //% subcategory="sugar-analog" weight=93
     export function sugarWaterLevelAna(pin: Port): number {
         return pins.analogReadPin(pin)
@@ -434,7 +434,7 @@ namespace futureboard {
 
     let sugarTempHumInit = false;
     let sugarTempHum: SugarTempHum;
-    //% blockId=als block="(ENV) get %env"
+    //% blockId=sugar_envReadData block="(ENV) get %env"
     //% subcategory="sugar-i2c" weight=99
     export function sugarEnvReadData(env: EnvType): number {
 
@@ -464,7 +464,7 @@ namespace futureboard {
 
     let sugarJoystickInit = false;
     let sugarJoystick: SugarJoyStick;
-    //% blockId=joyState block="(Joystick) state %state triggered"
+    //% blockId=sugar_joyState block="(Joystick) state %state triggered"
     //% subcategory="sugar-i2c" weight=98
     export function sugarJoyState(state: JoystickDir): boolean {
         if (!sugarJoystickInit) sugarJoystick = new SugarJoyStick();
@@ -472,7 +472,7 @@ namespace futureboard {
         return sugarJoystick.sta == state
     }
 
-    //% blockId=joyValue block="(Joystick) value %dir"
+    //% blockId=sugar_joyValue block="(Joystick) value %dir"
     //% subcategory="sugar-i2c" weight=97
     export function sugarJoyValue(dir: DirType): number {
         if (!sugarJoystickInit) sugarJoystick = new SugarJoyStick();
@@ -482,7 +482,7 @@ namespace futureboard {
 
     let sugarTOFInit = false;
     let sugarTOF: SugarTOF;
-    //% blockId=tof block="(TOF Distance) distance(mm)"
+    //% blockId=sugar_tofDistance block="(TOF Distance) distance(mm)"
     //% subcategory="sugar-i2c" weight=96
     export function sugarTofDistance(): number {
         if (!sugarTOFInit) sugarTOF = new SugarTOF();
@@ -494,7 +494,7 @@ namespace futureboard {
     /**
      * read uid
      */
-    //% blockId=sugarRfidReadUid block="(RFID) read card uid"
+    //% blockId=sugar_rfidReadUid block="(RFID) read card uid"
     //% subcategory="sugar-i2c" weight=95
     export function sugarRfidReadUid(): string {
         if (!sugarRFIDInit) {
@@ -507,7 +507,7 @@ namespace futureboard {
     /**
      * write block
      */
-    //% blockId=sugarRfidWriteBlock block="(RFID) write block %blockAddress write %data"
+    //% blockId=sugar_rfidWriteBlock block="(RFID) write block %blockAddress write %data"
     //% blockAddress.min=0 blockAddress.max=46
     //% subcategory="sugar-i2c" weight=94
     export function sugarRfidWriteBlock(blockAddress: number, data: string): void {
@@ -521,7 +521,7 @@ namespace futureboard {
     /**
      * read block
      */
-    //% blockId=sugarRfidReadBlock block="(RFID) read block %blockAddress"
+    //% blockId=sugar_rfidReadBlock block="(RFID) read block %blockAddress"
     //% blockAddress.min=0 blockAddress.max=46
     //% subcategory="sugar-i2c" weight=93
     export function sugarRfidReadBlock(blockAddress: number): string {
@@ -530,5 +530,67 @@ namespace futureboard {
             sugarRFIDInit = true
         }
         return sugarRFID.readBlock(blockAddress)
+    }
+
+    let sugarDisplayInit = false;
+    let sugarDisplay: SugarDisplay;
+    //% blockId=sugar_displayOff block="(TM1650) turn off"
+    //% subcategory="sugar-i2c" weight=92
+    export function sugarDisplayOff() {
+        if (!sugarDisplayInit) {
+            sugarDisplay = new SugarDisplay()
+            sugarDisplayInit = true
+        }
+        sugarDisplay.off()
+    }
+
+    //% blockId=sugar_displayOn block="(TM1650) turn on"
+    //% subcategory="sugar-i2c" weight=91
+    export function sugarDisplayOn() {
+        if (!sugarDisplayInit) {
+            sugarDisplay = new SugarDisplay()
+            sugarDisplayInit = true
+        }
+        sugarDisplay.on()
+    }
+
+    /**
+     * show a number in display
+     * @param num is number will be shown, eg: 100
+     */
+    //% blockId=sugar_displayShowNumber block="(TM1650) show int %num"
+    //% subcategory="sugar-i2c" weight=90
+    export function sugarDisplayShowNumber(num: number) {
+        if (!sugarDisplayInit) {
+            sugarDisplay = new SugarDisplay()
+            sugarDisplayInit = true
+        }
+        sugarDisplay.showNumber(num)
+    }
+
+    //% blockId=sugar_displayClear block="(TM1650) clear"
+    //% subcategory="sugar-i2c" weight=89
+    export function sugarDisplayClear() {
+        if (!sugarDisplayInit) {
+            sugarDisplay = new SugarDisplay()
+            sugarDisplayInit = true
+        }
+        sugarDisplay.clear()
+    }
+
+    /**
+     * show a digital in given position
+     * @param digit is number (0-15) will be shown, eg: 1
+     * @param bit is position, eg: 0
+     */
+    //% blockId=sugar_displayDigit block="(TM1650) show number %num|at %bit place"
+    //% subcategory="sugar-i2c" weight=88
+    //% num.max=15 num.min=0
+    export function sugarDisplayDigit(num: number, bit: number) {
+        if (!sugarDisplayInit) {
+            sugarDisplay = new SugarDisplay()
+            sugarDisplayInit = true
+        }
+        sugarDisplay.digit(num, bit)
     }
 }
