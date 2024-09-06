@@ -28,8 +28,8 @@
     "futureboard.sugarSoilMoisture|block": "(SoilMoisture) 土壤湿度 %pin",
     "futureboard.sugargrayscale|block": "(Grayscale) 灰度数值 %pin",
     "futureboard.sugarWaterLevelAna|block": "(WaterLevel) 雨滴水位 浸没程度 %pin",
-    "futureboard.envReadData|block": "(ENV)获取 %env",
-    "futureboard.joyState|block": "(JoyStick) 遥感状态 %state",
-    "futureboard.tofDistance|block": "(TOF) 检测距离(mm)",
-    "futureboard.joyValue|block": "(JoyStick) %dir 坐标值"
+    "futureboard.sugarEnvReadData|block": "(ENV)获取 %env",
+    "futureboard.sugarJoyState|block": "(JoyStick) 遥感状态 %state",
+    "futureboard.sugarTofDistance|block": "(TOF) 检测距离(mm)",
+    "futureboard.sugarJoyValue|block": "(JoyStick) %dir 坐标值"
 }

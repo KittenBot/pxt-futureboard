@@ -171,14 +171,14 @@ namespace futureboard {
     }
     const DA213ADDR = 39
 
-    export function initImu(){
+    export function initImu() {
         if (isSim) return;
         // init da213
         pins.i2cWriteRegister(DA213ADDR, 0x7f, 0x83)
         pins.i2cWriteRegister(DA213ADDR, 0x7f, 0x69)
         pins.i2cWriteRegister(DA213ADDR, 0x7f, 0xbd)
         let a = pins.i2cReadRegister(DA213ADDR, 0x8e)
-        if (a == 0){
+        if (a == 0) {
             pins.i2cWriteRegister(DA213ADDR, 0x8e, 0x50)
         }
         pins.i2cWriteRegister(DA213ADDR, 0x0f, 0x40)
@@ -189,8 +189,8 @@ namespace futureboard {
         pins.i2cWriteRegister(DA213ADDR, 0x15, 0x04)
     }
 
-    export function readImu(){
-        if (isSim) return [0,0,0];
+    export function readImu() {
+        if (isSim) return [0, 0, 0];
         pins.i2cWriteNumber(DA213ADDR, 0x02, NumberFormat.UInt8LE);
         let data = pins.i2cReadBuffer(DA213ADDR, 6);
         let x = data.getNumber(NumberFormat.Int16LE, 0)
@@ -225,7 +225,7 @@ namespace futureboard {
     }
 
     //% blockId=futurebox_digiread block="digital read|port %port"
-    export function digiRead(port: Port): boolean{
+    export function digiRead(port: Port): boolean {
         if (isSim) return false;
         return pins.digitalReadPin(port) == 1
     }
@@ -238,7 +238,7 @@ namespace futureboard {
 
     //% blockId=futurebox_digiwrite block="digital write|port %port|to %value"
     //% value.min=0 value.max=1
-    export function digiWrite(port: Port, value: number){
+    export function digiWrite(port: Port, value: number) {
         if (isSim) return;
         return pins.digitalWritePin(port, value)
     }
@@ -280,7 +280,7 @@ namespace futureboard {
         if (isSim) return true;
         //pins.setPull(pin, PinPullMode.PullUp)
         return pins.digitalReadPin(pin) == 0
-        
+
     }
 
     //% blockId=tracer block="(Tracker) black dectected %pin"
@@ -435,15 +435,15 @@ namespace futureboard {
     let sugarTempHumInit = false;
     let sugarTempHum: SugarTempHum;
     //% blockId=als block="(ENV) get %env"
-    //% subcategory="sugar-i2c" weight=84
-    export function envReadData(env: EnvType): number {
+    //% subcategory="sugar-i2c" weight=99
+    export function sugarEnvReadData(env: EnvType): number {
 
         if (!sugarTempHumInit) {
             sugarTempHum = new SugarTempHum()
             sugarTempHumInit = true
         }
         sugarTempHum.update()
-        if(env){
+        if (env) {
             return sugarTempHum.hum
         }
         return sugarTempHum.temp
@@ -465,28 +465,70 @@ namespace futureboard {
     let sugarJoystickInit = false;
     let sugarJoystick: SugarJoyStick;
     //% blockId=joyState block="(Joystick) state %state triggered"
-    //% subcategory="sugar-i2c" weight=71
-    export function joyState(state: JoystickDir): boolean {
+    //% subcategory="sugar-i2c" weight=98
+    export function sugarJoyState(state: JoystickDir): boolean {
         if (!sugarJoystickInit) sugarJoystick = new SugarJoyStick();
         sugarJoystick.joyState()
         return sugarJoystick.sta == state
     }
 
     //% blockId=joyValue block="(Joystick) value %dir"
-    //% subcategory="sugar-i2c" weight=70
-    export function joyValue(dir: DirType): number {
+    //% subcategory="sugar-i2c" weight=97
+    export function sugarJoyValue(dir: DirType): number {
         if (!sugarJoystickInit) sugarJoystick = new SugarJoyStick();
         sugarJoystick.joyValue()
         return dir === DirType.X ? sugarJoystick.coordX : sugarJoystick.coordY
     }
-    
+
     let sugarTOFInit = false;
     let sugarTOF: SugarTOF;
     //% blockId=tof block="(TOF Distance) distance(mm)"
-    //% subcategory="sugar-i2c" weight=76
-    export function tofDistance(): number {
+    //% subcategory="sugar-i2c" weight=96
+    export function sugarTofDistance(): number {
         if (!sugarTOFInit) sugarTOF = new SugarTOF();
         return sugarTOF.distance();
     }
 
+    let sugarRFIDInit = false;
+    let sugarRFID: SugarRFID;
+    /**
+     * read uid
+     */
+    //% blockId=sugarRfidReadUid block="(RFID) read card uid"
+    //% subcategory="sugar-i2c" weight=95
+    export function sugarRfidReadUid(): string {
+        if (!sugarRFIDInit) {
+            sugarRFID = new SugarRFID()
+            sugarRFIDInit = true
+        }
+        return sugarRFID.scanCar()
+    }
+
+    /**
+     * write block
+     */
+    //% blockId=sugarRfidWriteBlock block="(RFID) write block %blockAddress write %data"
+    //% blockAddress.min=0 blockAddress.max=46
+    //% subcategory="sugar-i2c" weight=94
+    export function sugarRfidWriteBlock(blockAddress: number, data: string): void {
+        if (!sugarRFIDInit) {
+            sugarRFID = new SugarRFID()
+            sugarRFIDInit = true
+        }
+        sugarRFID.writeBlock(blockAddress, data)
+    }
+
+    /**
+     * read block
+     */
+    //% blockId=sugarRfidReadBlock block="(RFID) read block %blockAddress"
+    //% blockAddress.min=0 blockAddress.max=46
+    //% subcategory="sugar-i2c" weight=93
+    export function sugarRfidReadBlock(blockAddress: number): string {
+        if (!sugarRFIDInit) {
+            sugarRFID = new SugarRFID()
+            sugarRFIDInit = true
+        }
+        return sugarRFID.readBlock(blockAddress)
+    }
 }
