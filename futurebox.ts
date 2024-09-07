@@ -606,7 +606,7 @@ namespace futureboard {
             sugarDisplay = new SugarDisplay()
             sugarDisplayInit = true
         }
-        sugarDisplay.showDpAt(show,bit)
+        sugarDisplay.showDpAt(show, bit)
     }
 
     //% blockId="sugar_setIntensity" block="(TM1650) set intensity %dat"
@@ -618,5 +618,26 @@ namespace futureboard {
             sugarDisplayInit = true
         }
         sugarDisplay.setIntensity(dat)
+    }
+
+    export enum PMType {
+        //% block="PM1.0"
+        PM1_0 = 0,
+        //% block="PM2.5"
+        PM2_5 = 1,
+        //% block="PM10"
+        PM10 = 2
+    }
+
+    let sugarPMSA003IInit = false;
+    let sugarPMSA003I: SugarPMSA003I;
+    //% blockId=sugar_PMSA003IRead block="(PMSA003I) read %pmType"
+    //% subcategory="sugar-i2c" weight=85
+    export function sugarPMSA003IRead(pmType: PMType): number {
+        if (!sugarPMSA003IInit) {
+            sugarPMSA003I = new SugarPMSA003I()
+            sugarPMSA003IInit = true
+        }
+        return sugarPMSA003I.read()[pmType]
     }
 }

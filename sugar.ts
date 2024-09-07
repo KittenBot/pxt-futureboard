@@ -72,3 +72,39 @@ class SugarTOF {
     }
 
 }
+
+const PMSA003I_ADDR = 0X12
+
+class SugarPMSA003I {
+
+    dataList: number[];
+
+    constructor() {
+        this.dataList = [0, 0, 0, 0, 0, 0]
+    }
+
+    read():number[]{
+        let data = pins.i2cReadBuffer(PMSA003I_ADDR,32)
+        let verify_expect = (data[0x1e] << 8) | data[0x1f]
+        let verify_actual = 0;
+        let index = 0
+        while(index<30){
+            verify_actual+=data[index]
+            index += 1
+        }
+        if (verify_expect == verify_actual){
+            //PM1.0, PM2.5, PM10
+            //CF = 1, 标准颗粒物
+            this.dataList[0] = (data[0x04] << 8) | data[0x05]
+            this.dataList[1] = (data[0x06] << 8) | data[0x07]
+            this.dataList[2] = (data[0x08] << 8) | data[0x09]
+
+            //PM1.0, PM2.5, PM10
+            //大气环境下
+            this.dataList[3] = (data[0x0a] << 8) | data[0x0b]
+            this.dataList[4] = (data[0x0c] << 8) | data[0x0d]
+            this.dataList[5] = (data[0x0e] << 8) | data[0x0f]
+        } 
+        return this.dataList
+    }
+}

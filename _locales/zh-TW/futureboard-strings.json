@@ -41,5 +41,6 @@
     "futureboard.sugarDisplayClear|block": "(TM1650) 數位管 清屏",
     "futureboard.sugarDisplayDigit|block": "(TM1650) 數位管 顯示十六進位 %num 在位置 %bit",
     "futureboard.sugarShowDpAt|block": "(TM1650) 數位管 %num 顯示點 %bit",
-    "futureboard.sugarSetIntensity|block": "(TM1650) 數位管 設定亮度 %dat"
+    "futureboard.sugarSetIntensity|block": "(TM1650) 數位管 設定亮度 %dat",
+    "futureboard.sugarPMSA003IRead|block": "(PMSA003I) 讀取 %pmType"
 }
