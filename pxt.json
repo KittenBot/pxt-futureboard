@@ -17,7 +17,8 @@
         "neopixel.ts",
         "sugarRFID.ts",
         "sugarDisplay.ts",
-        "sugarColor.ts"
+        "sugarColor.ts",
+        "sugarUV.ts"
     ],
     "public": true,
     "targetVersions": {

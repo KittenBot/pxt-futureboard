@@ -685,4 +685,28 @@ namespace futureboard {
         return sugarColor.getHex()
     }
 
+    let sugarUVInit = false;
+    let sugarUV: SugarUV;
+    //% blockId=sugar_UValsValue block="(uv) get ALS"
+    //% subcategory="sugar-i2c" weight=84
+    export function sugarUVAlsValue(): number {
+
+        if (!sugarUVInit) {
+            sugarUV = new SugarUV()
+            sugarUVInit = true
+        }
+        return sugarUV.als()
+    }
+
+    //% blockId=sugar_UVuviValue block="(uv) get UVI"
+    //% subcategory="sugar-i2c" weight=83
+    export function sugarUVUviValue(): number {
+
+        if (!sugarUVInit) {
+            sugarUV = new SugarUV()
+            sugarUVInit = true
+        }
+        return sugarUV.uvi()
+    }
+
 }

@@ -48,5 +48,7 @@
     "futureboard.sugarColorGetHex|block": "(颜色识别)獲取顔色(hex)",
     "futureboard.Colorindex.Red|block": "紅",
     "futureboard.Colorindex.Green|block": "綠",
-    "futureboard.Colorindex.Blue|block": "藍"
+    "futureboard.Colorindex.Blue|block": "藍",
+    "futureboard.sugarUVAlsValue|block": "光照指數(lux)",
+    "futureboard.sugarUVUviValue|block": "光照度(UV Index)"
 }
