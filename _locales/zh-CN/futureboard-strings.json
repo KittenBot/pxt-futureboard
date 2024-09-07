@@ -31,5 +31,15 @@
     "futureboard.sugarEnvReadData|block": "(ENV)获取 %env",
     "futureboard.sugarJoyState|block": "(JoyStick) 遥感状态 %state",
     "futureboard.sugarTofDistance|block": "(TOF) 检测距离(mm)",
-    "futureboard.sugarJoyValue|block": "(JoyStick) %dir 坐标值"
+    "futureboard.sugarJoyValue|block": "(JoyStick) %dir 坐标值",
+    "futureboard.sugarRfidReadUid|block": "(RFID)获取卡片uid",
+    "futureboard.sugarRfidWriteBlock|block": "(RFID)向块 %blockAddress 写入数据 %data",
+    "futureboard.sugarRfidReadBlock|block": "(RFID)读取块 %blockAddress",
+    "futureboard.sugarDisplayOff|block": "(TM1650) 数码管 打开显示",
+    "futureboard.sugarDisplayOn|block": "(TM1650) 数码管 关闭显示",
+    "futureboard.sugarDisplayShowNumber|block": "(TM1650) 数码管 显示数字 %num",
+    "futureboard.sugarDisplayClear|block": "(TM1650) 数码管 清屏",
+    "futureboard.sugarDisplayDigit|block": "(TM1650) 数码管 显示十六进制 %num 在位置 %bit",
+    "futureboard.sugarShowDpAt|block": "(TM1650) 数码管 %num 显示点 %bit",
+    "futureboard.sugarSetIntensity|block": "(TM1650) 数码管 设置亮度 %dat"
 }

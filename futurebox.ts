@@ -593,4 +593,30 @@ namespace futureboard {
         }
         sugarDisplay.digit(num, bit)
     }
+
+    /**
+     * show Dot Point in given position，1-4
+     * @param bit is positiion, eg: 0
+     * @param show is true/false, eg: true
+     */
+    //% blockId="sugar_showDpAt" block="(TM1650) %num show decimal point at %bit place"
+    //% subcategory="sugar-i2c" weight=87
+    export function sugarShowDpAt(show: boolean, bit: number) {
+        if (!sugarDisplayInit) {
+            sugarDisplay = new SugarDisplay()
+            sugarDisplayInit = true
+        }
+        sugarDisplay.showDpAt(show,bit)
+    }
+
+    //% blockId="sugar_setIntensity" block="(TM1650) set intensity %dat"
+    //% value.min=0 value.max=8 value.defl=8
+    //% subcategory="sugar-i2c" weight=86
+    export function sugarSetIntensity(dat: number) {
+        if (!sugarDisplayInit) {
+            sugarDisplay = new SugarDisplay()
+            sugarDisplayInit = true
+        }
+        sugarDisplay.setIntensity(dat)
+    }
 }
