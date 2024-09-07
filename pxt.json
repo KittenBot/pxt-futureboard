@@ -16,7 +16,8 @@
         "_locales/zh-TW/futureboard-strings.json",
         "neopixel.ts",
         "sugarRFID.ts",
-        "sugarDisplay.ts"
+        "sugarDisplay.ts",
+        "sugarColor.ts"
     ],
     "public": true,
     "targetVersions": {

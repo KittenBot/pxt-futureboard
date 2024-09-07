@@ -640,4 +640,49 @@ namespace futureboard {
         }
         return sugarPMSA003I.read()[pmType]
     }
+
+
+    let sugarColorInit = false;
+    let sugarColor: SugarColor;
+    //% blockId=sugar_colorUpdate block="(color recognition) update data"
+    //% subcategory="sugar-i2c" weight=84
+    export function sugarColorUpdate(): void {
+
+        if (!sugarColorInit) {
+            sugarColor = new SugarColor()
+            sugarColorInit = true
+        }
+        sugarColor.update()
+    }
+
+
+    export enum Colorindex {
+        //% block="red"
+        Red = 0,
+        //% block="green"
+        Green = 1,
+        //% block="blue"
+        Blue = 2,
+    }
+
+    //% blockId=sugar_colorGetRGB block="(color recognition) get RGB %index"
+    //% subcategory="sugar-i2c" weight=83
+    export function sugarColorGetRGB(index: Colorindex): number {
+        if (!sugarColorInit) {
+            sugarColor = new SugarColor()
+            sugarColorInit = true
+        }
+        return sugarColor.getRGB(index)
+    }
+
+    //% blockId=sugar_colorGetHex block="(color recognition) get color(hex)"
+    //% subcategory="sugar-i2c" weight=82
+    export function sugarColorGetHex(): number {
+        if (!sugarColorInit) {
+            sugarColor = new SugarColor()
+            sugarColorInit = true
+        }
+        return sugarColor.getHex()
+    }
+
 }

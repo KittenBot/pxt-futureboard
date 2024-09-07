@@ -42,5 +42,11 @@
     "futureboard.sugarDisplayDigit|block": "(TM1650) 數位管 顯示十六進位 %num 在位置 %bit",
     "futureboard.sugarShowDpAt|block": "(TM1650) 數位管 %num 顯示點 %bit",
     "futureboard.sugarSetIntensity|block": "(TM1650) 數位管 設定亮度 %dat",
-    "futureboard.sugarPMSA003IRead|block": "(PMSA003I) 讀取 %pmType"
+    "futureboard.sugarPMSA003IRead|block": "(PMSA003I) 讀取 %pmType",
+    "futureboard.sugarColorUpdate|block": "(颜色识别)更新模塊數據",
+    "futureboard.sugarColorGetRGB|block": "(颜色识别)獲取顔色%index",
+    "futureboard.sugarColorGetHex|block": "(颜色识别)獲取顔色(hex)",
+    "futureboard.Colorindex.Red|block": "紅",
+    "futureboard.Colorindex.Green|block": "綠",
+    "futureboard.Colorindex.Blue|block": "藍"
 }
