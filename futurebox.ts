@@ -202,11 +202,11 @@ namespace futureboard {
     //% blockId=futurebox_motor block="Motor %motor|speed %speed"
     //% speed.min=-255 speed.max=255
     export function motorRun(motor: Motor, speed: number) {
-        let p1 = 14
-        let p2 = 13
+        let p1 = 47
+        let p2 = 21
         if (motor == Motor.M2) {
-            p1 = 47
-            p2 = 21
+            p1 = 34
+            p2 = 13
         }
         if (speed >= 0) {
             analogWrite(p1, speed * 16) // 256 > 4096

@@ -41,25 +41,16 @@ class SugarColor {
         this.write_default()
     }
     time_config(): void {
-        let buf = pins.createBuffer(2);
-        buf[0] = BH1745NUC_REG_MODE_CONTROL1
-        buf[1] = BH1745NUC_RGBC_MEASURE_TIME_160
-        pins.i2cWriteBuffer(BH1745NUC_DEFAULT_ADDRESS, buf)
+        pins.i2cWriteBuffer(BH1745NUC_DEFAULT_ADDRESS, Buffer.fromArray([BH1745NUC_REG_MODE_CONTROL1, BH1745NUC_RGBC_MEASURE_TIME_160]))
     }
 
     gain_config(): void {
         let GAIN_CONFIG = BH1745NUC_VALID_UPDATE | BH1745NUC_RGBC_EN | BH1745NUC_ADC_GAIN_1
-        let buf2 = pins.createBuffer(2);
-        buf2[0] = BH1745NUC_REG_MODE_CONTROL2
-        buf2[1] = GAIN_CONFIG
-        pins.i2cWriteBuffer(BH1745NUC_DEFAULT_ADDRESS, buf2)
+        pins.i2cWriteBuffer(BH1745NUC_DEFAULT_ADDRESS, Buffer.fromArray([BH1745NUC_REG_MODE_CONTROL2, GAIN_CONFIG]))
     }
 
     write_default(): void {
-        let buf3 = pins.createBuffer(2);
-        buf3[0] = BH1745NUC_REG_MODE_CONTROL3
-        buf3[1] = BH1745NUC_DEFAULT_RESERVED
-        pins.i2cWriteBuffer(BH1745NUC_DEFAULT_ADDRESS, buf3)
+        pins.i2cWriteBuffer(BH1745NUC_DEFAULT_ADDRESS, Buffer.fromArray([BH1745NUC_REG_MODE_CONTROL3, BH1745NUC_DEFAULT_RESERVED]))
     }
 
     update(): void {
