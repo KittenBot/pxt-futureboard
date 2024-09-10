@@ -205,7 +205,7 @@ namespace futureboard {
         let p1 = 47
         let p2 = 21
         if (motor == Motor.M2) {
-            p1 = 34
+            p1 = 14
             p2 = 13
         }
         if (speed >= 0) {
