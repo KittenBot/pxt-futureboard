@@ -50,5 +50,6 @@
     "futureboard.Colorindex.Green|block": "绿",
     "futureboard.Colorindex.Blue|block": "蓝",
     "futureboard.sugarUVAlsValue|block": "光照度(lux)",
-    "futureboard.sugarUVUviValue|block": "紫外线指数(UV Index)"
+    "futureboard.sugarUVUviValue|block": "紫外线指数(UV Index)",
+    "neopixel.Port.Onboard|block": "板载灯串"
 }

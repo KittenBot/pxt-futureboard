@@ -480,6 +480,19 @@ namespace neopixel {
         }
     }
 
+    export enum Port {
+        //% block="Onboard"
+        Onboard = 3,
+        //% block="P1"
+        P1 = 4,
+        //% block="P2"
+        P2 = 5,
+        //% block="P3"
+        P3 = 7,
+        //% block="P4"
+        P4 = 6,
+    }
+
     /**
      * Create a new NeoPixel driver for `numleds` LEDs.
      * @param pin the pin where the neopixel is connected.
@@ -490,7 +503,7 @@ namespace neopixel {
     //% parts="neopixel"
     //% trackArgs=0,2
     //% blockSetVariable=strip
-    export function create(pin: number, numleds: number, mode: NeoPixelMode): Strip {
+    export function create(pin: Port, numleds: number, mode: NeoPixelMode): Strip {
         let strip = new Strip();
         let stride = mode === NeoPixelMode.RGBW ? 4 : 3;
         strip.buf = control.createBuffer(numleds * stride);
