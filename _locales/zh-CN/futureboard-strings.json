@@ -51,5 +51,16 @@
     "futureboard.Colorindex.Blue|block": "蓝",
     "futureboard.sugarUVAlsValue|block": "光照度(lux)",
     "futureboard.sugarUVUviValue|block": "紫外线指数(UV Index)",
-    "neopixel.Port.Onboard|block": "板载灯串"
+    "neopixel.Port.Onboard|block": "板载灯串",
+    "futureboard.sugarSolarpwrOnOff|block": "(太阳能模块) 输出状态设置为 %state",
+    "futureboard.sugarSolarpwrBatteryLevel|block": "(太阳能模块) 电池电压(伏)",
+    "futureboard.sugarSolarpwrGetDate|block": "(太阳能模块) 获取当前时间 %date",
+    "futureboard.sugarSolarpwrSetDate|block": "(太阳能模块) 设置时间  %y 年 %month 月 %d 日 %h 时 %minute 分 %s 秒",
+    "futureboard.sugarSolarpwrSetAlarm|block": "(太阳能模块) 模块立刻休眠 并于 %h 时 %minute 分 %s 秒 后自唤醒",
+    "futureboard.SolarpwrDate.Year|block": "年",
+    "futureboard.SolarpwrDate.Months|block": "月",
+    "futureboard.SolarpwrDate.Day|block": "日",
+    "futureboard.SolarpwrDate.Hour|block": "时",
+    "futureboard.SolarpwrDate.Minute|block": "分",
+    "futureboard.SolarpwrDate.Sec|block": "秒"
 }

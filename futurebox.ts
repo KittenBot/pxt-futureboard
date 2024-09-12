@@ -708,4 +708,77 @@ namespace futureboard {
         return sugarUV.uvi()
     }
 
+    export enum SPOnOff {
+        ON = 1,
+        OFF = 0,
+    }
+
+    let sugarSolarPwrInit = false;
+    let sugarSolarPwr: SugarSolarPwr;
+    //% blockId=sugar_solarpwrOnOff block="(solar power) set output status %state"
+    //% subcategory="solar power" weight=40
+    export function sugarSolarpwrOnOff(state: SPOnOff): void {
+
+        if (!sugarSolarPwrInit) {
+            sugarSolarPwr = new SugarSolarPwr()
+            sugarSolarPwrInit = true
+        }
+        sugarSolarPwr.onOff(state)
+    }
+
+    //% blockId=solarpwrBatteryLevel block="(solar power) battery level(V)"
+    //% subcategory="solar power" weight=39
+    export function sugarSolarpwrBatteryLevel(): number {
+        if (!sugarSolarPwrInit) {
+            sugarSolarPwr = new SugarSolarPwr()
+            sugarSolarPwrInit = true
+        }
+        return sugarSolarPwr.batteryLevel()
+    }
+
+    export enum SolarpwrDate {
+        //% block="year"
+        Year = 0,
+        //% block="months"
+        Months = 1,
+        //% block="day"
+        Day = 2,
+        //% block="hour"
+        Hour = 3,
+        //% block="minute"
+        Minute = 4,
+        //% block="sec"
+        Sec = 5,
+    }
+
+    //% blockId=sugar_solarpwrGetDate block="(solar power) get date %date"
+    //% subcategory="solar power" weight=38
+    export function sugarSolarpwrGetDate(date: SolarpwrDate): number {
+        if (!sugarSolarPwrInit) {
+            sugarSolarPwr = new SugarSolarPwr()
+            sugarSolarPwrInit = true
+        }
+        return sugarSolarPwr.getDate(date)
+    }
+
+    //% blockId=solarpwrSetDate block="(solar power) set date year %y moths %month day %d hour %h minute %minute sec %s"
+    //% subcategory="solar power" weight=38
+    export function sugarSolarpwrSetDate(y: number, month: number, d: number, h: number, minute: number, s: number): void {
+        if (!sugarSolarPwrInit) {
+            sugarSolarPwr = new SugarSolarPwr()
+            sugarSolarPwrInit = true
+        }
+        sugarSolarPwr.setDate(y, month, d, h, minute, s)
+    }
+
+    //% blockId=solarpwrSetAlarm block="(solar power) set alarm hour %h minute %minute sec %s"
+    //% subcategory="solar power" weight=37
+    export function sugarSolarpwrSetAlarm(h: number, minute: number, s: number): void {
+        if (!sugarSolarPwrInit) {
+            sugarSolarPwr = new SugarSolarPwr()
+            sugarSolarPwrInit = true
+        }
+        sugarSolarPwr.setAlarm(h, minute, s)
+    }
+
 }

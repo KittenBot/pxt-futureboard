@@ -18,7 +18,8 @@
         "sugarRFID.ts",
         "sugarDisplay.ts",
         "sugarColor.ts",
-        "sugarUV.ts"
+        "sugarUV.ts",
+        "sugarSolarPwr.ts"
     ],
     "public": true,
     "targetVersions": {

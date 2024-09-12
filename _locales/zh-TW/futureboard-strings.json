@@ -51,5 +51,17 @@
     "futureboard.Colorindex.Blue|block": "藍",
     "futureboard.sugarUVAlsValue|block": "光照指數(lux)",
     "futureboard.sugarUVUviValue|block": "光照度(UV Index)",
-    "neopixel.Port.Onboard|block": "板載燈串"
+    "neopixel.Port.Onboard|block": "板載燈串",
+    "futureboard.sugarSolarpwrOnOff|block": "(太陽能模組) 輸出狀態設定為 %state",
+    "futureboard.sugarSolarpwrBatteryLevel|block": "(太陽能模組) 電池電壓(伏特)",
+    "futureboard.sugarSolarpwrGetDate|block": "(太陽能模組) 取得目前時間 %date",
+    "futureboard.sugarSolarpwrSetDate|block": "(太陽能模組) 設定時間 %y 年 %month 月 %d 日 %h 時 %minute 分 %s 秒",
+    "futureboard.sugarSolarpwrSetAlarm|block": "(太陽能模組) 模組立刻休眠 並於 %h 時 %minute 分 %s 秒 後自喚醒",
+    "futureboard.SolarpwrDate.Year|block": "年",
+    "futureboard.SolarpwrDate.Months|block": "月",
+    "futureboard.SolarpwrDate.Day|block": "日",
+    "futureboard.SolarpwrDate.Hour|block": "時",
+    "futureboard.SolarpwrDate.Minute|block": "分",
+    "futureboard.SolarpwrDate.Sec|block": "秒"
+    
 }
