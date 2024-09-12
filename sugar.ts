@@ -36,6 +36,89 @@ class SugarTempHum {
 
 }
 
+enum EnvTypeII {
+    //% block="Pressure(hPa)"
+    Pressure = 0,
+    //% block="Altitude(m)"
+    Altitude = 1,
+    //% block="Temp(℃)"
+    CTemp = 2,
+    //% block="Temp(℉)"
+    FTemp = 3
+}
+
+//self.i2c address of the device
+const HP203B_ADDRESS = 0x76
+
+//ADC_CVT(HP203B_ADC_CVT, 3 - bit OSR, 2 - bit CHNL)
+
+//HP203B Command Set
+const HP203B_SOFT_RST = 0x06          //Soft reset the device
+const HP203B_ADC_CVT = 0x40           //Perform ADC conversion
+const HP203B_READ_PT = 0x10           //Read the temperature and pressure values
+const HP203B_READ_AT = 0x11           //Read the temperature and altitude values
+const HP203B_READ_P = 0x30            //Read the pressure value only
+const HP203B_READ_A = 0x31            //Read the altitude value only
+const HP203B_READ_T = 0x32            //Read the temperature value only
+const HP203B_ANA_CAL = 0x28           //Re - calibrate the internal analog blocks
+const HP203B_READ_REG = 0x80          //Read out the control registers
+const HP203B_WRITE_REG = 0xC0         //Write in the control registers
+
+
+//OSR Configuration
+const HP203B_OSR_4096 = 0x00                // Conversion time: 4.1ms
+const HP203B_OSR_2048 = 0x04                // Conversion time: 8.2ms
+const HP203B_OSR_1024 = 0x08                // Conversion time: 16.4ms
+const HP203B_OSR_512 = 0xC0                 // Conversion time: 32.8ms
+const HP203B_OSR_256 = 0x10                 // Conversion time: 65.6ms
+const HP203B_OSR_128 = 0x14                 // Conversion time: 131.1ms
+
+const HP203B_CH_PRESSTEMP = 0x00                  // Sensor Pressure and Temperature Channel
+const HP203B_CH_TEMP = 0x02                       // Temperature Channel
+
+class SugarTempHumII {
+
+    i2cwrite(addr: number, reg: number, value: number[]) {
+        let a = [reg]
+        if (value.length)
+            a = a.concat(value)
+        return pins.i2cWriteBuffer(addr, Buffer.fromArray(a))
+    }
+
+    i2cread(addr: number, reg: number, size: number) {
+        pins.i2cWriteNumber(addr, reg, NumberFormat.UInt8BE);
+        return pins.i2cReadBuffer(addr, size);
+    }
+
+    envUpdate() {
+        const CNVRSN_CONFIG = Buffer.fromArray([HP203B_ADC_CVT | HP203B_OSR_1024 | HP203B_CH_PRESSTEMP])
+        pins.i2cWriteBuffer(HP203B_ADDRESS, CNVRSN_CONFIG)
+    }
+
+    envGetData(pin: EnvTypeII): number {
+        let presData = this.i2cread(HP203B_ADDRESS, HP203B_READ_P, 3)
+        let pressure = (((presData[0] & 0x0F) * 65536) + (presData[1] * 256) + presData[2]) / 100.00
+
+        let tempData = this.i2cread(HP203B_ADDRESS, HP203B_READ_T, 3)
+        let cTemp = (((tempData[0] & 0x0F) * 65536) + (tempData[1] * 256) + tempData[2]) / 100.00
+        const fTemp = (cTemp * 1.8) + 32
+
+        let altData = this.i2cread(HP203B_ADDRESS, HP203B_READ_A, 3)
+        let altitude = (((altData[0] & 0x0F) << 16) + (altData[1] << 8) + altData[2]) / 100.00
+
+        if (pin === EnvTypeII.Pressure) {
+            return pressure
+        } else if (pin === EnvTypeII.Altitude) {
+            return altitude
+        } else if (pin === EnvTypeII.CTemp) {
+            return cTemp
+        } else {
+            return fTemp
+        }
+    }
+
+}
+
 const JOYSTICK_ADDR = 0x5c
 
 class SugarJoyStick {
@@ -83,16 +166,16 @@ class SugarPMSA003I {
         this.dataList = [0, 0, 0, 0, 0, 0]
     }
 
-    read():number[]{
-        let data = pins.i2cReadBuffer(PMSA003I_ADDR,32)
+    read(): number[] {
+        let data = pins.i2cReadBuffer(PMSA003I_ADDR, 32)
         let verify_expect = (data[0x1e] << 8) | data[0x1f]
         let verify_actual = 0;
         let index = 0
-        while(index<30){
-            verify_actual+=data[index]
+        while (index < 30) {
+            verify_actual += data[index]
             index += 1
         }
-        if (verify_expect == verify_actual){
+        if (verify_expect == verify_actual) {
             //PM1.0, PM2.5, PM10
             //CF = 1, 标准颗粒物
             this.dataList[0] = (data[0x04] << 8) | data[0x05]
@@ -104,7 +187,7 @@ class SugarPMSA003I {
             this.dataList[3] = (data[0x0a] << 8) | data[0x0b]
             this.dataList[4] = (data[0x0c] << 8) | data[0x0d]
             this.dataList[5] = (data[0x0e] << 8) | data[0x0f]
-        } 
+        }
         return this.dataList
     }
 }

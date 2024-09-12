@@ -62,5 +62,11 @@
     "futureboard.SolarpwrDate.Day|block": "日",
     "futureboard.SolarpwrDate.Hour|block": "时",
     "futureboard.SolarpwrDate.Minute|block": "分",
-    "futureboard.SolarpwrDate.Sec|block": "秒"
+    "futureboard.SolarpwrDate.Sec|block": "秒",
+    "futureboard.sugarEnvIIUpdate|block": "(ENV.II型) 气压海拔模块 更新数据",
+    "futureboard.sugarEnvGetData|block": "(ENV.II型) 气压海拔模块 获取 %pin",
+    "futureboard.EnvTypeII.Pressure|block": "压强(hPa)",
+    "futureboard.EnvTypeII.Altitude|block": "海拔(m)",
+    "futureboard.EnvTypeII.CTemp|block": "温度(℃)",
+    "futureboard.EnvTypeII.FTemp|block": "温度(℉)"
 }

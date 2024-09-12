@@ -448,6 +448,39 @@ namespace futureboard {
         return sugarTempHum.temp
     }
 
+    let sugarTempHumIIInit = false;
+    let sugarTempHumII: SugarTempHumII;
+    //% blockId="sugar_envIIUpdate" block="(ENV.II) update"
+    //% subcategory="sugar-i2c" weight=73
+    export function sugarEnvIIUpdate() {
+        if (!sugarTempHumIIInit) {
+            sugarTempHumII = new SugarTempHumII()
+            sugarTempHumIIInit = true
+        }
+        sugarTempHumII.envUpdate()
+    }
+
+    export enum EnvTypeII {
+        //% block="Pressure(hPa)"
+        Pressure = 0,
+        //% block="Altitude(m)"
+        Altitude = 1,
+        //% block="Temp(℃)"
+        CTemp = 2,
+        //% block="Temp(℉)"
+        FTemp = 3
+    }
+
+    //% blockId="sugar_envGetData" block="(ENV.II)get value %pin"
+    //% subcategory="sugar-i2c" weight=72
+    export function sugarEnvGetData(pin: EnvTypeII): number {
+        if (!sugarTempHumIIInit) {
+            sugarTempHumII = new SugarTempHumII()
+            sugarTempHumIIInit = true
+        }
+        return sugarTempHumII.envGetData(pin)
+    }
+    
     export enum JoystickDir {
         pressed = 1,
         left = 0x10,
@@ -687,7 +720,7 @@ namespace futureboard {
     let sugarUVInit = false;
     let sugarUV: SugarUV;
     //% blockId=sugar_UValsValue block="(uv) get ALS"
-    //% subcategory="sugar-i2c" weight=84
+    //% subcategory="sugar-i2c" weight=85
     export function sugarUVAlsValue(): number {
 
         if (!sugarUVInit) {
@@ -698,7 +731,7 @@ namespace futureboard {
     }
 
     //% blockId=sugar_UVuviValue block="(uv) get UVI"
-    //% subcategory="sugar-i2c" weight=83
+    //% subcategory="sugar-i2c" weight=85
     export function sugarUVUviValue(): number {
 
         if (!sugarUVInit) {
