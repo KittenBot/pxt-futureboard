@@ -716,7 +716,7 @@ namespace futureboard {
     let sugarSolarPwrInit = false;
     let sugarSolarPwr: SugarSolarPwr;
     //% blockId=sugar_solarpwrOnOff block="(solar power) set output status %state"
-    //% subcategory="solar power" weight=40
+    //% subcategory="sugar-i2c" weight=40
     export function sugarSolarpwrOnOff(state: SPOnOff): void {
 
         if (!sugarSolarPwrInit) {
@@ -727,7 +727,7 @@ namespace futureboard {
     }
 
     //% blockId=solarpwrBatteryLevel block="(solar power) battery level(V)"
-    //% subcategory="solar power" weight=39
+    //% subcategory="sugar-i2c" weight=39
     export function sugarSolarpwrBatteryLevel(): number {
         if (!sugarSolarPwrInit) {
             sugarSolarPwr = new SugarSolarPwr()
@@ -752,7 +752,7 @@ namespace futureboard {
     }
 
     //% blockId=sugar_solarpwrGetDate block="(solar power) get date %date"
-    //% subcategory="solar power" weight=38
+    //% subcategory="sugar-i2c" weight=38
     export function sugarSolarpwrGetDate(date: SolarpwrDate): number {
         if (!sugarSolarPwrInit) {
             sugarSolarPwr = new SugarSolarPwr()
@@ -762,7 +762,7 @@ namespace futureboard {
     }
 
     //% blockId=solarpwrSetDate block="(solar power) set date year %y moths %month day %d hour %h minute %minute sec %s"
-    //% subcategory="solar power" weight=38
+    //% subcategory="sugar-i2c" weight=38
     export function sugarSolarpwrSetDate(y: number, month: number, d: number, h: number, minute: number, s: number): void {
         if (!sugarSolarPwrInit) {
             sugarSolarPwr = new SugarSolarPwr()
@@ -772,7 +772,7 @@ namespace futureboard {
     }
 
     //% blockId=solarpwrSetAlarm block="(solar power) set alarm hour %h minute %minute sec %s"
-    //% subcategory="solar power" weight=37
+    //% subcategory="sugar-i2c" weight=37
     export function sugarSolarpwrSetAlarm(h: number, minute: number, s: number): void {
         if (!sugarSolarPwrInit) {
             sugarSolarPwr = new SugarSolarPwr()
